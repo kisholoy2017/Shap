@@ -43,14 +43,16 @@ if uploaded_file is not None:
         st.header("Feature Importance")
         
         # SHAP summary plot
-        plt.title("Feature Importance based on SHAP values")
-        shap.summary_plot(shap_values, X)
-        st.pyplot()  # Display SHAP plot in Streamlit
+        st.subheader("Feature Importance based on SHAP values")
+        fig_summary, ax_summary = plt.subplots()
+        shap.summary_plot(shap_values, X, show=False)
+        st.pyplot(fig_summary)  # Display SHAP summary plot in Streamlit
         st.write('---')
 
         # SHAP bar plot
-        plt.title("Feature Importance based on SHAP values (Bar)")
-        shap.summary_plot(shap_values, X, plot_type="bar")
-        st.pyplot()  # Display SHAP bar plot in Streamlit
+        st.subheader("Feature Importance based on SHAP values (Bar)")
+        fig_bar, ax_bar = plt.subplots()
+        shap.summary_plot(shap_values, X, plot_type="bar", show=False)
+        st.pyplot(fig_bar)  # Display SHAP bar plot in Streamlit
 else:
     st.write("Please upload a CSV file to proceed.")
